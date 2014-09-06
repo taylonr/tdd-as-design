@@ -1,0 +1,3 @@
+describe('Event Model', function(){
+
+});
