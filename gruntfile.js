@@ -22,8 +22,8 @@ module.exports = function(grunt) {
 				}
 			},
 			serverJS: {
-				files: watchFiles.serverJS,
-				tasks: ['jshint'],
+				files: watchFiles.serverJS.concat(watchFiles.mochaTests),
+				tasks: ['jshint', 'mochaTest'],
 				options: {
 					livereload: true
 				}
@@ -47,10 +47,6 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
-			},
-			mochaTests:{
-				files: watchFiles.mochaTests,
-				tasks: ['mochaTest']
 			}
 		},
 		jshint: {
