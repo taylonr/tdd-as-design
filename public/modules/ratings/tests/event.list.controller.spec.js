@@ -90,10 +90,11 @@ describe('Event List Controller', function(){
     });
   });
 
-  describe('When selecting an event', function(){
-    it('Should set the id of the event to fetch', function(){
+  describe('When selecting an item', function(){
+    it('should navigate to the detail state', function(){
       scope.selectEvent(1);
-      expect($state.go).toHaveBeenCalledWith('eventDetails', 1);
+      expect($state.go).toHaveBeenCalledWith('eventDetails',
+        {eventId: 1});
     });
   });
 });

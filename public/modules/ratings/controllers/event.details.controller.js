@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('ratings').controller('EventDetailsController',
-  ['$scope', 'EventsService', controller]);
+  ['$scope','$stateParams', 'EventsService', controller]);
 
-function controller($scope, EventsService){
+function controller($scope, $stateParams, EventsService){
   $scope.loading = true;
 
   $scope.getEvent = function(id){
@@ -15,4 +15,6 @@ function controller($scope, EventsService){
       $scope.loading = false;
     });
   };
+
+  $scope.getEvent($stateParams.eventId);
 }

@@ -17,8 +17,8 @@ function controller($scope, $state, eventService){
   };
 
   $scope.selectEvent = function(id){
-    $state.go('eventDetails', id);
-  }
+    $state.go('eventDetails', {eventId: id});
+  };
 
   $scope.getAllEvents();
 }
