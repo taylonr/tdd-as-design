@@ -3,9 +3,9 @@
 var app = angular.module('ratings');
 
 app.controller('EventListController',
-  ['$scope', 'EventsService', controller]);
+  ['$scope', '$state', 'EventsService', controller]);
 
-function controller($scope, eventService){
+function controller($scope, $state, eventService){
   $scope.loading = true;
 
   $scope.getAllEvents = function(){
@@ -15,6 +15,10 @@ function controller($scope, eventService){
       $scope.loading = false;
     });
   };
+
+  $scope.selectEvent = function(id){
+    $state.go('eventDetails', id);
+  }
 
   $scope.getAllEvents();
 }

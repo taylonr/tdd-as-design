@@ -6,6 +6,7 @@ describe('Event List Controller', function(){
     $rootScope,
     serviceSpy,
     deferred,
+    $state,
     scope;
 
   beforeEach(module(ApplicationConfiguration.applicationModuleName));
@@ -18,12 +19,19 @@ describe('Event List Controller', function(){
     $provide.value('EventsService', EventService);
   }));
 
-  beforeEach(inject(function(_$rootScope_, $controller, _$q_){
+  beforeEach(inject(function(_$rootScope_, $controller, _$q_,
+      $httpBackend, _$state_){
+
     $rootScope = _$rootScope_;
     scope = $rootScope.$new();
 
-    $q = _$q_;
+    $httpBackend.whenGET('modules/core/views/home.client.view.html')
+      .respond(200);
 
+    $state = _$state_;
+    spyOn($state, 'go');
+
+    $q = _$q_;
     deferred = $q.defer();
 
     spyOn(EventService, 'getAllEvents').and.returnValue(deferred.promise);
@@ -79,6 +87,13 @@ describe('Event List Controller', function(){
   describe('When loading controller', function(){
     it('Should fetch events', function(){
       expect(EventService.getAllEvents).toHaveBeenCalled();
+    });
+  });
+
+  describe('When selecting an event', function(){
+    it('Should set the id of the event to fetch', function(){
+      scope.selectEvent(1);
+      expect($state.go).toHaveBeenCalledWith('eventDetails', 1);
     });
   });
 });
