@@ -32,6 +32,6 @@ function eventsService($resource, $q){
     getSingleEvent: function(id){
       return getData(id, 'get');
     }
-  }
+  };
 
 }
