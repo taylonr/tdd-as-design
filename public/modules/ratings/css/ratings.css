@@ -15,3 +15,15 @@ h3{
 h4{
   margin-top: 20px;
 }
+
+span.bad{
+  color: red;
+}
+
+span.ok{
+  color: yellow;
+}
+
+span.good{
+  color: green;
+}
