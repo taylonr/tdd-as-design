@@ -9,9 +9,9 @@ function ratingsRoutes($stateProvider){
     templateUrl: 'modules/ratings/views/event.list.html',
     controller: 'EventListController'
   })
-  .state('eventsDetail', {
+  .state('eventDetails', {
     url: '/EventRatings/:eventId',
-    templateUrl: 'modules/ratings/views/event.detail.html',
-    controller: 'EventDetailController'
+    templateUrl: 'modules/ratings/views/event.details.html',
+    controller: 'EventDetailsController'
   });
 }
