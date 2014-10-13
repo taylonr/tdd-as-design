@@ -20,5 +20,15 @@ function controller($scope, $state, eventService){
     $state.go('eventDetails', {eventId: id});
   };
 
+  $scope.calculateRatingQuality = function(rating){
+    if(rating < 2){
+      return 'bad';
+    } else if (rating <= 3.5){
+      return 'ok';
+    } else {
+      return 'good';
+    }
+  };
+
   $scope.getAllEvents();
 }

@@ -97,4 +97,21 @@ describe('Event List Controller', function(){
         {eventId: 1});
     });
   });
+
+  describe('When calculating rating quality', function(){
+    it('should return bad when avg rating < 2', function(){
+      var quality = scope.calculateRatingQuality(1.9);
+      expect(quality).toEqual('bad');
+    });
+
+    it('should return ok when between 2 and 3.5', function(){
+      var quality = scope.calculateRatingQuality(3.5);
+      expect(quality).toEqual('ok');
+    });
+
+    it('should return good when > 3.5', function(){
+      var quality = scope.calculateRatingQuality(3.6);
+      expect(quality).toEqual('good');
+    });
+  });
 });
