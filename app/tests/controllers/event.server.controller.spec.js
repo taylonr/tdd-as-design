@@ -17,6 +17,10 @@ describe('Event Controller', function(){
           sentData = data;
         }
       };
+
+      EventModel.create = function(){
+        statusCode = 403;
+      }
     });
 
   describe('When fetching all events', function(){
@@ -81,6 +85,52 @@ describe('Event Controller', function(){
 
       controller.findSingle(req, res);
       sentData.id.should.equal(1);
+    });
+  });
+
+  describe('When adding an event', function(){
+    it('Should return 403 when name is not specified', function(){
+      req = {
+        body: {
+          name: 'test event'
+        }
+      };
+
+      controller.addEvent(req, res);
+    });
+
+    it('Should return 403 when event type 1 has no freq', function(){
+      req = {
+        body: {
+          name: 'test event',
+          eventType: 2
+        }
+      };
+
+      controller.addEvent(req, res);
+      statusCode.should.equal(403);
+    });
+  });
+
+  describe('When updating an event', function(){
+    it('Should return 500 if save fails', function(){
+      EventModel.findById = function(callback){
+        callback();
+      };
+
+      EventModel.save = function(callback){
+        callback({e: 1}, undefined);
+      }
+
+      req = {
+        params: {
+          id: 1
+        }
+      };
+
+      controller.updateEvent(req, res);
+
+      statusCode.should.equal(500);
     });
   });
 });
